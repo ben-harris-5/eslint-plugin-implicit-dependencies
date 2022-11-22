@@ -21,6 +21,9 @@ module.exports = {
           },
           dev: {
             type: 'boolean'
+          },
+          self: {
+            type: 'boolean'
           }
         },
         additionalProperties: false
@@ -65,6 +68,8 @@ module.exports = {
         } else if (pkg.peerDependencies && pkg.peerDependencies[moduleName] && opts.peer) {
           return;
         } else if (pkg.devDependencies && pkg.devDependencies[moduleName] && opts.dev) {
+          return;
+        } else if (pkg.name === moduleName && opts.self) {
           return;
         } else {
           context.report({
